@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\savon_listings;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 // getting all ads 
 Route::get('/', function () {
     return view('ads', [
-        'heading' => 'Savon Classified Ads',
+        'heading' => 'Savon Classified Listing',
        // 'Ads' => ads::all();
+         'classifieds'=> savon_listings::all()
+        
     ]);
 });
 
-Route::get('/first', function () {
-    return view('ads', [
-        'heading' => 'Savon Ads'    ]);
+//single classified listing 
+Route::get('/ads/{id}', function ($id) {
+    return view('ad', [
+        'heading' => 'Savon Classified Listing',
+        'ad' => savon_listings::find($id)    ]);
 });
